@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "325735986053",
+    "project_id": "shanghai-82239",
+    "storage_bucket": "shanghai-82239.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325735986053:android:a39f07b2cd9c9a20be0aec",
+        "android_client_info": {
+          "package_name": "com.order.shanghai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325735986053-cl3c7pqdv00khjdu317lmm67qcdeghdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATAfvnoTAjrYd7XF2bpDEbDwTzL14EJEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325735986053-cl3c7pqdv00khjdu317lmm67qcdeghdc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "325735986053-0ppu9lirruoa3qqilv1kaqs4ej703pqu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shanghai.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325735986053:android:51cb7fa32f49e1b4be0aec",
+        "android_client_info": {
+          "package_name": "com.shanghai.restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325735986053-cl3c7pqdv00khjdu317lmm67qcdeghdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATAfvnoTAjrYd7XF2bpDEbDwTzL14EJEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325735986053-cl3c7pqdv00khjdu317lmm67qcdeghdc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "325735986053-0ppu9lirruoa3qqilv1kaqs4ej703pqu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shanghai.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
