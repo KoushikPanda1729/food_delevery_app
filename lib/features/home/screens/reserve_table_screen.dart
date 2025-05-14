@@ -1,16 +1,20 @@
+import 'dart:convert';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:stackfood_multivendor/common/widgets/custom_button_widget.dart';
 import 'package:stackfood_multivendor/common/widgets/custom_text_field_widget.dart';
 import 'package:stackfood_multivendor/features/auth/controllers/auth_controller.dart';
+import 'package:stackfood_multivendor/features/language/controllers/localization_controller.dart';
 import 'package:stackfood_multivendor/features/profile/controllers/profile_controller.dart';
+import 'package:stackfood_multivendor/features/splash/controllers/splash_controller.dart';
+import 'package:stackfood_multivendor/helper/responsive_helper.dart';
 import 'package:stackfood_multivendor/helper/route_helper.dart';
 import 'package:stackfood_multivendor/util/dimensions.dart';
-import 'package:stackfood_multivendor/util/styles.dart';
 import 'package:stackfood_multivendor/util/images.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:stackfood_multivendor/util/styles.dart';
 
 class ReserveTableScreen extends StatefulWidget {
   const ReserveTableScreen({super.key});
@@ -24,6 +28,10 @@ class _ReserveTableScreenState extends State<ReserveTableScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? _countryDialCode = CountryCode.fromCountryCode(
+          Get.find<SplashController>().configModel!.country!)
+      .dialCode;
+
   bool _isLoading = false;
   String _selectedOutlet = 'Hatibagan';
   DateTime _selectedDate = DateTime.now();
@@ -61,7 +69,7 @@ class _ReserveTableScreenState extends State<ReserveTableScreen> {
         Get.find<ProfileController>().userInfoModel != null) {
       final userInfo = Get.find<ProfileController>().userInfoModel;
       _nameController.text = userInfo?.fName ?? '';
-      _phoneController.text = userInfo?.phone ?? '';
+      _phoneController.text = '';
       _emailController.text = userInfo?.email ?? '';
     }
   }
@@ -194,7 +202,7 @@ class _ReserveTableScreenState extends State<ReserveTableScreen> {
 
         // Send the reservation details to the admin email via the POST request
         final response = await http.post(
-          Uri.parse('https://logicrax.com/email'),
+          Uri.parse('https://order.shanghai.net.in/reserve_table.php'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(payload),
         );
@@ -365,13 +373,23 @@ class _ReserveTableScreenState extends State<ReserveTableScreen> {
 
                   const SizedBox(height: Dimensions.paddingSizeDefault),
 
-                  // Phone Field
                   CustomTextFieldWidget(
+                    titleText: 'phone'.tr,
                     controller: _phoneController,
-                    hintText: 'Phone Number',
                     inputType: TextInputType.phone,
-                    prefixIcon: Icons.phone,
-                    divider: true,
+                    inputAction: TextInputAction.done,
+                    isPhone: true,
+                    showTitle: ResponsiveHelper.isDesktop(context),
+                    onCountryChanged: (CountryCode countryCode) {
+                      _countryDialCode = countryCode.dialCode;
+                    },
+                    countryDialCode: _countryDialCode != null
+                        ? CountryCode.fromCountryCode(
+                                Get.find<SplashController>()
+                                    .configModel!
+                                    .country!)
+                            .code
+                        : Get.find<LocalizationController>().locale.countryCode,
                   ),
 
                   const SizedBox(height: Dimensions.paddingSizeDefault),
