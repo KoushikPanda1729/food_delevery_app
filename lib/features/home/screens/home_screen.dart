@@ -1,9 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stackfood_multivendor/common/widgets/custom_button_widget.dart';
+import 'package:stackfood_multivendor/common/widgets/customizable_space_bar_widget.dart';
+import 'package:stackfood_multivendor/common/widgets/footer_view_widget.dart';
 import 'package:stackfood_multivendor/common/widgets/menu_drawer_widget.dart';
+import 'package:stackfood_multivendor/common/widgets/web_menu_bar.dart';
+import 'package:stackfood_multivendor/features/address/controllers/address_controller.dart';
+import 'package:stackfood_multivendor/features/auth/controllers/auth_controller.dart';
 import 'package:stackfood_multivendor/features/bogo/controllers/bogo_controller.dart';
 import 'package:stackfood_multivendor/features/bogo/widgets/bogo_item_view_widget.dart';
-import 'package:stackfood_multivendor/features/product/controllers/campaign_controller.dart';
+import 'package:stackfood_multivendor/features/category/controllers/category_controller.dart';
+import 'package:stackfood_multivendor/features/cuisine/controllers/cuisine_controller.dart';
 import 'package:stackfood_multivendor/features/home/controllers/home_controller.dart';
+import 'package:stackfood_multivendor/features/home/screens/theme1_home_screen.dart';
 import 'package:stackfood_multivendor/features/home/screens/web_home_screen.dart';
 import 'package:stackfood_multivendor/features/home/widgets/all_restaurant_filter_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/all_restaurants_widget.dart';
@@ -11,40 +20,29 @@ import 'package:stackfood_multivendor/features/home/widgets/bad_weather_widget.d
 import 'package:stackfood_multivendor/features/home/widgets/banner_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/best_review_item_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/cuisine_view_widget.dart';
-import 'package:stackfood_multivendor/features/home/widgets/location_banner_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/new_on_stackfood_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/order_again_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/popular_foods_nearby_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/popular_restaurants_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/refer_banner_view_widget.dart';
-import 'package:stackfood_multivendor/features/home/screens/theme1_home_screen.dart';
 import 'package:stackfood_multivendor/features/home/widgets/today_trends_view_widget.dart';
-import 'package:stackfood_multivendor/features/home/widgets/what_on_your_mind_view_widget.dart';
 import 'package:stackfood_multivendor/features/language/controllers/localization_controller.dart';
-import 'package:stackfood_multivendor/features/order/controllers/order_controller.dart';
-import 'package:stackfood_multivendor/features/restaurant/controllers/restaurant_controller.dart';
+import 'package:stackfood_multivendor/features/location/controllers/location_controller.dart';
 import 'package:stackfood_multivendor/features/notification/controllers/notification_controller.dart';
+import 'package:stackfood_multivendor/features/order/controllers/order_controller.dart';
+import 'package:stackfood_multivendor/features/product/controllers/campaign_controller.dart';
+import 'package:stackfood_multivendor/features/product/controllers/product_controller.dart';
 import 'package:stackfood_multivendor/features/profile/controllers/profile_controller.dart';
-import 'package:stackfood_multivendor/common/widgets/customizable_space_bar_widget.dart';
+import 'package:stackfood_multivendor/features/restaurant/controllers/restaurant_controller.dart';
+import 'package:stackfood_multivendor/features/review/controllers/review_controller.dart';
 import 'package:stackfood_multivendor/features/splash/controllers/splash_controller.dart';
 import 'package:stackfood_multivendor/features/splash/domain/models/config_model.dart';
-import 'package:stackfood_multivendor/features/address/controllers/address_controller.dart';
-import 'package:stackfood_multivendor/features/auth/controllers/auth_controller.dart';
-import 'package:stackfood_multivendor/features/category/controllers/category_controller.dart';
-import 'package:stackfood_multivendor/features/cuisine/controllers/cuisine_controller.dart';
-import 'package:stackfood_multivendor/features/location/controllers/location_controller.dart';
-import 'package:stackfood_multivendor/features/product/controllers/product_controller.dart';
-import 'package:stackfood_multivendor/features/review/controllers/review_controller.dart';
 import 'package:stackfood_multivendor/helper/address_helper.dart';
 import 'package:stackfood_multivendor/helper/responsive_helper.dart';
 import 'package:stackfood_multivendor/helper/route_helper.dart';
 import 'package:stackfood_multivendor/util/dimensions.dart';
 import 'package:stackfood_multivendor/util/images.dart';
 import 'package:stackfood_multivendor/util/styles.dart';
-import 'package:stackfood_multivendor/common/widgets/footer_view_widget.dart';
-import 'package:stackfood_multivendor/common/widgets/web_menu_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -102,6 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double scrollPoint = 0.0;
+    String? restaurant = Get.parameters['restaurant'];
+    debugPrint("Navigated from: $restaurant");
 
     return GetBuilder<LocalizationController>(
         builder: (localizationController) {
@@ -456,7 +456,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             isPopular: false)
                                         : const SizedBox(),
 
-                                    const CuisineViewWidget(),
+                                    // const CuisineViewWidget(),
 
                                     _configModel.popularRestaurant == 1
                                         ? const PopularRestaurantsViewWidget()
@@ -525,35 +525,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 180,
                                         fit: BoxFit.cover,
                                       ),
-                                      // Added descriptive text
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            16, 16, 16, 8),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'book_your_perfect_dining_experience'
-                                                  .tr,
-                                              style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black87,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 8),
-                                            Text(
-                                              "secure_your_table".tr,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black54,
-                                                height: 1.4,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+
                                       // Button at the bottom
                                       Container(
                                         padding: const EdgeInsets.fromLTRB(

@@ -13,7 +13,8 @@ class LoyaltyRepository implements LoyaltyRepositoryInterface {
   @override
   Future<WalletModel?> getList({int? offset}) async {
     WalletModel? loyaltyModel;
-    Response response = await apiClient.getData('${AppConstants.loyaltyTransactionUri}?offset=$offset&limit=10');
+    Response response = await apiClient.getData(
+        '${AppConstants.loyaltyTransactionUri}?offset=$offset&limit=10');
     if (response.statusCode == 200) {
       loyaltyModel = WalletModel.fromJson(response.body);
     }
@@ -22,7 +23,8 @@ class LoyaltyRepository implements LoyaltyRepositoryInterface {
 
   @override
   Future<Response> convertPointToWallet({int? point}) async {
-    return await apiClient.postData(AppConstants.loyaltyPointTransferUri, {"point": point});
+    return await apiClient
+        .postData(AppConstants.loyaltyPointTransferUri, {"point": point});
   }
 
   @override
@@ -54,5 +56,4 @@ class LoyaltyRepository implements LoyaltyRepositoryInterface {
   Future update(Map<String, dynamic> body, int? id) {
     throw UnimplementedError();
   }
-
 }

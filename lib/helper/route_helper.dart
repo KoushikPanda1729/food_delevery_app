@@ -28,6 +28,8 @@ import 'package:stackfood_multivendor/features/order/screens/order_details_scree
 import 'package:stackfood_multivendor/features/order/screens/order_screen.dart';
 import 'package:stackfood_multivendor/features/order/screens/order_tracking_screen.dart';
 import 'package:stackfood_multivendor/features/order/screens/refund_request_screen.dart';
+import 'package:stackfood_multivendor/features/place_selection/screen/place_selection.dart';
+import 'package:stackfood_multivendor/features/place_selection/screen/plate_pleasers/palate_pleasers.dart';
 import 'package:stackfood_multivendor/features/profile/screens/profile_screen.dart';
 import 'package:stackfood_multivendor/features/profile/screens/update_profile_screen.dart';
 import 'package:stackfood_multivendor/features/refer%20and%20earn/screens/refer_and_earn_screen.dart';
@@ -141,10 +143,14 @@ class RouteHelper {
   static const String guestTrackOrderScreen = '/guest-track-order-screen';
   static const String bogo = '/bogo';
   static const String reserveTable = '/reserve-table';
+  static const String bookPalateService = '/book-palate-service';
+  static const String placeSelection = '/place-selection';
   static String getReserveTableRoute() => reserveTable;
-
-  static String getInitialRoute({bool fromSplash = false}) =>
-      '$initial?from-splash=$fromSplash';
+  static String getPlaceSelectionRoute() => placeSelection;
+  static String getPlaceServiceRoute() => bookPalateService;
+  static String getInitialRoute(
+          {bool fromSplash = false, String? restaurant}) =>
+      '$initial?from-splash=$fromSplash&restaurant=${restaurant ?? ''}';
   static String getSplashRoute(
       NotificationBodyModel? body, DeepLinkBody? linkBody) {
     String data = 'null';
@@ -338,8 +344,16 @@ class RouteHelper {
 
   static List<GetPage> routes = [
     GetPage(
+      name: placeSelection,
+      page: () => getRoute(const PlaceSelectionScreen()),
+    ),
+    GetPage(
       name: reserveTable,
       page: () => getRoute(const ReserveTableScreen()),
+    ),
+    GetPage(
+      name: bookPalateService,
+      page: () => getRoute(const PlatePleasersPage()),
     ),
     GetPage(
         name: initial,

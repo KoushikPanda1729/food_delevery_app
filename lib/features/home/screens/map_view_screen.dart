@@ -45,9 +45,19 @@ class _MapViewScreenState extends State<MapViewScreen> {
     return Stack(
       children: [
         Image.asset(Images.locationMarker, height: 40, width: 40),
-        Positioned(top: 3, left: 0, right: 0, child: Center(
-          child: ClipOval(child: CustomImageWidget(image: path, placeholder: Images.restaurantPlaceholder, height: 20, width: 20, fit: BoxFit.cover)),
-        )),
+        Positioned(
+            top: 3,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ClipOval(
+                  child: CustomImageWidget(
+                      image: path,
+                      placeholder: Images.restaurantPlaceholder,
+                      height: 20,
+                      width: 20,
+                      fit: BoxFit.cover)),
+            )),
       ],
     );
   }
@@ -57,73 +67,114 @@ class _MapViewScreenState extends State<MapViewScreen> {
     return Scaffold(
       appBar: CustomAppBarWidget(title: 'nearby_restaurants'.tr),
       body: GetBuilder<RestaurantController>(builder: (restController) {
-        return restController.restaurantModel != null ? CustomGoogleMapMarkerBuilder(
-          customMarkers: _customMarkers,
-          builder: (context, markers) {
-            if (markers == null) {
-              return Stack(children: [
-
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(zoom: 12, target: LatLng(
-                    double.parse(AddressHelper.getAddressFromSharedPref()!.latitude!),
-                    double.parse(AddressHelper.getAddressFromSharedPref()!.longitude!),
-                  )),
-                  myLocationEnabled: false,
-                  compassEnabled: false,
-                  zoomControlsEnabled: true,
-                  onTap: (position) => Get.find<SplashController>().setNearestRestaurantIndex(-1),
-                  minMaxZoomPreference: const MinMaxZoomPreference(0, 16),
-                  onMapCreated: (GoogleMapController controller) {
-
-                  },
-                ),
-
-                GetBuilder<SplashController>(builder: (splashController) {
-                  return splashController.nearestRestaurantIndex != -1 ? Positioned(
-                    bottom: 0,
-                    child: RestaurantDetailsSheetWidget(callback: (int index) => _controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(
-                      double.parse(restController.restaurantModel!.restaurants![index].latitude!),
-                      double.parse(restController.restaurantModel!.restaurants![index].longitude!),
-                    ), zoom: 16)))),
-                  ) : const SizedBox();
-                }),
-
-              ]);
-            }
-            return Stack(children: [
-
-              GoogleMap(
-                initialCameraPosition: CameraPosition(zoom: 12, target: LatLng(
-                  double.parse(AddressHelper.getAddressFromSharedPref()!.latitude!),
-                  double.parse(AddressHelper.getAddressFromSharedPref()!.longitude!),
-                )),
-                markers: GetPlatform.isWeb ? _markers : markers,
-                myLocationEnabled: false,
-                compassEnabled: false,
-                zoomControlsEnabled: true,
-                onTap: (position) => Get.find<SplashController>().setNearestRestaurantIndex(-1),
-                minMaxZoomPreference: const MinMaxZoomPreference(0, 16),
-                onMapCreated: (GoogleMapController controller) {
-                  _controller = controller;
-                  if(restController.restaurantModel != null && restController.restaurantModel!.restaurants!.isNotEmpty) {
-                    GetPlatform.isWeb? _setMarkerForWeb(restController.restaurantModel!.restaurants!) : _setMarkers(restController.restaurantModel!.restaurants!);
+        return restController.restaurantModel != null
+            ? CustomGoogleMapMarkerBuilder(
+                customMarkers: _customMarkers,
+                builder: (context, markers) {
+                  if (markers == null) {
+                    return Stack(children: [
+                      GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                            zoom: 12,
+                            target: LatLng(
+                              double.parse(
+                                  AddressHelper.getAddressFromSharedPref()!
+                                      .latitude!),
+                              double.parse(
+                                  AddressHelper.getAddressFromSharedPref()!
+                                      .longitude!),
+                            )),
+                        myLocationEnabled: false,
+                        compassEnabled: false,
+                        zoomControlsEnabled: true,
+                        onTap: (position) => Get.find<SplashController>()
+                            .setNearestRestaurantIndex(-1),
+                        minMaxZoomPreference: const MinMaxZoomPreference(0, 16),
+                        onMapCreated: (GoogleMapController controller) {},
+                      ),
+                      GetBuilder<SplashController>(builder: (splashController) {
+                        return splashController.nearestRestaurantIndex != -1
+                            ? Positioned(
+                                bottom: 0,
+                                child: RestaurantDetailsSheetWidget(
+                                    callback: (int index) => _controller!
+                                        .animateCamera(CameraUpdate
+                                            .newCameraPosition(CameraPosition(
+                                                target: LatLng(
+                                                  double.parse(restController
+                                                      .restaurantModel!
+                                                      .restaurants![index]
+                                                      .latitude!),
+                                                  double.parse(restController
+                                                      .restaurantModel!
+                                                      .restaurants![index]
+                                                      .longitude!),
+                                                ),
+                                                zoom: 16)))),
+                              )
+                            : const SizedBox();
+                      }),
+                    ]);
                   }
+                  return Stack(children: [
+                    GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                          zoom: 12,
+                          target: LatLng(
+                            double.parse(
+                                AddressHelper.getAddressFromSharedPref()!
+                                    .latitude!),
+                            double.parse(
+                                AddressHelper.getAddressFromSharedPref()!
+                                    .longitude!),
+                          )),
+                      markers: GetPlatform.isWeb ? _markers : markers,
+                      myLocationEnabled: false,
+                      compassEnabled: false,
+                      zoomControlsEnabled: true,
+                      onTap: (position) => Get.find<SplashController>()
+                          .setNearestRestaurantIndex(-1),
+                      minMaxZoomPreference: const MinMaxZoomPreference(0, 16),
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller = controller;
+                        if (restController.restaurantModel != null &&
+                            restController
+                                .restaurantModel!.restaurants!.isNotEmpty) {
+                          GetPlatform.isWeb
+                              ? _setMarkerForWeb(
+                                  restController.restaurantModel!.restaurants!)
+                              : _setMarkers(
+                                  restController.restaurantModel!.restaurants!);
+                        }
+                      },
+                    ),
+                    GetBuilder<SplashController>(builder: (splashController) {
+                      return splashController.nearestRestaurantIndex != -1
+                          ? Positioned(
+                              bottom: 0,
+                              child: RestaurantDetailsSheetWidget(
+                                  callback: (int index) => _controller!
+                                      .animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                              CameraPosition(
+                                                  target: LatLng(
+                                                    double.parse(restController
+                                                        .restaurantModel!
+                                                        .restaurants![index]
+                                                        .latitude!),
+                                                    double.parse(restController
+                                                        .restaurantModel!
+                                                        .restaurants![index]
+                                                        .longitude!),
+                                                  ),
+                                                  zoom: 16)))),
+                            )
+                          : const SizedBox();
+                    }),
+                  ]);
                 },
-              ),
-
-              GetBuilder<SplashController>(builder: (splashController) {
-                return splashController.nearestRestaurantIndex != -1 ? Positioned(
-                  bottom: 0,
-                  child: RestaurantDetailsSheetWidget(callback: (int index) => _controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(
-                    double.parse(restController.restaurantModel!.restaurants![index].latitude!),
-                    double.parse(restController.restaurantModel!.restaurants![index].longitude!),
-                  ), zoom: 16)))),
-                ) : const SizedBox();
-              }),
-
-            ]);
-          },
-        ) : const Center(child: CircularProgressIndicator());
+              )
+            : const Center(child: CircularProgressIndicator());
       }),
     );
   }
@@ -132,35 +183,42 @@ class _MapViewScreenState extends State<MapViewScreen> {
     List<LatLng> latLngs = [];
     _customMarkers = [];
     _customMarkers.add(MarkerData(
-      marker: Marker(markerId: const MarkerId('id-0'), position: LatLng(
-        double.parse(AddressHelper.getAddressFromSharedPref()!.latitude!),
-        double.parse(AddressHelper.getAddressFromSharedPref()!.longitude!),
-      )),
+      marker: Marker(
+          markerId: const MarkerId('id-0'),
+          position: LatLng(
+            double.parse(AddressHelper.getAddressFromSharedPref()!.latitude!),
+            double.parse(AddressHelper.getAddressFromSharedPref()!.longitude!),
+          )),
       child: Image.asset(Images.myLocationMarker, height: 20, width: 20),
     ));
     int index0 = 0;
-    for(int index=0; index<restaurants.length; index++) {
+    for (int index = 0; index < restaurants.length; index++) {
       index0++;
-      LatLng latLng = LatLng(double.parse(restaurants[index].latitude!), double.parse(restaurants[index].longitude!));
+      LatLng latLng = LatLng(double.parse(restaurants[index].latitude!),
+          double.parse(restaurants[index].longitude!));
       latLngs.add(latLng);
       _customMarkers.add(MarkerData(
-        marker: Marker(markerId: MarkerId('id-$index0'), position: latLng, onTap: () {
-          Get.find<SplashController>().setNearestRestaurantIndex(index);
-        }),
-        child: _customMarker('${Get.find<SplashController>().configModel!.baseUrls!.restaurantImageUrl}/${restaurants[index].logo}'),
+        marker: Marker(
+            markerId: MarkerId('id-$index0'),
+            position: latLng,
+            onTap: () {
+              Get.find<SplashController>().setNearestRestaurantIndex(index);
+            }),
+        child: _customMarker(
+            '${Get.find<SplashController>().configModel!.baseUrls!.restaurantImageUrl}/${restaurants[index].logo}'),
       ));
     }
     // if(!ResponsiveHelper.isWeb() && _controller != null) {
     //   Get.find<LocationController>().zoomToFit(_controller, _latLngs, padding: 0);
     // }
     await Future.delayed(const Duration(milliseconds: 500));
-    if(_reload == 0) {
+    if (_reload == 0) {
       setState(() {});
       _reload = 1;
     }
 
     await Future.delayed(const Duration(seconds: 3));
-    if(_reload == 1) {
+    if (_reload == 1) {
       setState(() {});
       _reload = 2;
     }
@@ -169,35 +227,40 @@ class _MapViewScreenState extends State<MapViewScreen> {
   void _setMarkerForWeb(List<Restaurant> restaurants) async {
     List<LatLng> latLngs = [];
     _markers = HashSet<Marker>();
-    _markers.add(Marker(markerId: const MarkerId('id-0'), position: LatLng(
-      double.parse(AddressHelper.getAddressFromSharedPref()!.latitude!),
-      double.parse(AddressHelper.getAddressFromSharedPref()!.longitude!),
-    ), icon: BitmapDescriptor.defaultMarker));
+    _markers.add(Marker(
+        markerId: const MarkerId('id-0'),
+        position: LatLng(
+          double.parse(AddressHelper.getAddressFromSharedPref()!.latitude!),
+          double.parse(AddressHelper.getAddressFromSharedPref()!.longitude!),
+        ),
+        icon: BitmapDescriptor.defaultMarker));
     int index0 = 0;
-    for(int index=0; index<restaurants.length; index++) {
+    for (int index = 0; index < restaurants.length; index++) {
       index0++;
-      LatLng latLng = LatLng(double.parse(restaurants[index].latitude!), double.parse(restaurants[index].longitude!));
+      LatLng latLng = LatLng(double.parse(restaurants[index].latitude!),
+          double.parse(restaurants[index].longitude!));
       latLngs.add(latLng);
-      _markers.add(Marker(markerId: MarkerId('id-$index0'), position: latLng, onTap: () {
-        Get.find<SplashController>().setNearestRestaurantIndex(index);
-      }, icon: BitmapDescriptor.defaultMarker));
+      _markers.add(Marker(
+          markerId: MarkerId('id-$index0'),
+          position: latLng,
+          onTap: () {
+            Get.find<SplashController>().setNearestRestaurantIndex(index);
+          },
+          icon: BitmapDescriptor.defaultMarker));
     }
     // if(!ResponsiveHelper.isWeb() && _controller != null) {
     //   Get.find<LocationController>().zoomToFit(_controller, _latLngs, padding: 0);
     // }
     await Future.delayed(const Duration(milliseconds: 500));
-    if(_reload == 0) {
+    if (_reload == 0) {
       setState(() {});
       _reload = 1;
     }
 
     await Future.delayed(const Duration(seconds: 3));
-    if(_reload == 1) {
+    if (_reload == 1) {
       setState(() {});
       _reload = 2;
     }
   }
-
-
 }
-
