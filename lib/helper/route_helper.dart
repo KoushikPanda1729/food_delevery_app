@@ -13,7 +13,7 @@ import 'package:stackfood_multivendor/features/checkout/screens/order_successful
 import 'package:stackfood_multivendor/features/checkout/screens/payment_screen.dart';
 import 'package:stackfood_multivendor/features/checkout/screens/payment_webview_screen.dart';
 import 'package:stackfood_multivendor/features/home/screens/map_view_screen.dart';
-import 'package:stackfood_multivendor/features/home/screens/reserve_table_screen.dart';
+import 'package:stackfood_multivendor/features/home/screens/reserve_table/reserve_table_screen.dart';
 import 'package:stackfood_multivendor/features/html/enums/html_type.dart';
 import 'package:stackfood_multivendor/features/html/screens/html_viewer_screen.dart';
 import 'package:stackfood_multivendor/features/language/screens/language_screen.dart';
