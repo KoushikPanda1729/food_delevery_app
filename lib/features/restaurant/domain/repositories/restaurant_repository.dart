@@ -128,7 +128,8 @@ class RestaurantRepository implements RestaurantRepositoryInterface {
 
   @override
   Future<List<Restaurant>?> getRestaurantList(
-      {String? type,
+      {String? restaurant,
+      String? type,
       bool isRecentlyViewed = false,
       bool isOrderAgain = false,
       bool isPopular = false,

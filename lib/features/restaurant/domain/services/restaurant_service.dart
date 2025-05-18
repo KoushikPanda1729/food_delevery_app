@@ -44,7 +44,7 @@ class RestaurantService implements RestaurantServiceInterface {
 
   @override
   Future<RestaurantModel?> getRestaurantList(int offset, String filterBy,
-      int topRated, int discount, int veg, int nonVeg,
+      int topRated, int discount, int veg, int nonVeg, String? restaurant,
       {bool fromMap = false}) async {
     return await restaurantRepositoryInterface.getList(
       offset: offset,
@@ -53,6 +53,7 @@ class RestaurantService implements RestaurantServiceInterface {
       discount: discount,
       veg: veg,
       nonVeg: nonVeg,
+      restaurant: restaurant,
       fromMap: fromMap,
     );
   }

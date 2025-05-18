@@ -14,13 +14,16 @@ abstract class RestaurantRepositoryInterface extends RepositoryInterface {
       int? discount,
       int? veg,
       int? nonVeg,
+      String? restaurant,
       bool fromMap = false});
-  Future<List<Restaurant>?> getRestaurantList(
-      {String? type,
-      bool isRecentlyViewed = false,
-      bool isOrderAgain = false,
-      bool isPopular = false,
-      bool isLatest = false});
+  Future<List<Restaurant>?> getRestaurantList({
+    String? type,
+    bool isRecentlyViewed = false,
+    bool isOrderAgain = false,
+    bool isPopular = false,
+    bool isLatest = false,
+    String? restaurant,
+  });
   Future<RecommendedProductModel?> getRestaurantRecommendedItemList(
       int? restaurantId);
   Future<List<Product>?> getCartRestaurantSuggestedItemList(int? restaurantID);

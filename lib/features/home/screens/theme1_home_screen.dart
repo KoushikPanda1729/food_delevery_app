@@ -237,7 +237,7 @@ class Theme1HomeScreen extends StatelessWidget {
                   totalSize: restaurantController.restaurantModel?.totalSize,
                   offset: restaurantController.restaurantModel?.offset,
                   onPaginate: (int? offset) async => await restaurantController
-                      .getRestaurantList(offset!, false),
+                      .getRestaurantList(offset!, false, ''),
                   productView: ProductViewWidget(
                     isRestaurant: true,
                     products: null,

@@ -48,6 +48,8 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   static Future<void> loadData(bool reload) async {
+    String? restaurant = Get.parameters['restaurant'];
+    debugPrint("Navigated from: $restaurant");
     Get.find<HomeController>().getBannerList(reload);
     Get.find<CategoryController>().getCategoryList(reload);
     Get.find<BogoController>().getBogoProductList(reload, false);
@@ -68,7 +70,7 @@ class HomeScreen extends StatefulWidget {
       Get.find<ReviewController>().getReviewedProductList(reload, 'all', false);
     }
 
-    Get.find<RestaurantController>().getRestaurantList(1, reload);
+    Get.find<RestaurantController>().getRestaurantList(1, reload, restaurant!);
     if (Get.find<AuthController>().isLoggedIn()) {
       Get.find<RestaurantController>()
           .getRecentlyViewedRestaurantList(reload, 'all', false);
@@ -127,7 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   .getLatestRestaurantList(true, 'all', false);
               await Get.find<ReviewController>()
                   .getReviewedProductList(true, 'all', false);
-              await Get.find<RestaurantController>().getRestaurantList(1, true);
+              await Get.find<RestaurantController>()
+                  .getRestaurantList(1, true, restaurant ?? '');
               if (Get.find<AuthController>().isLoggedIn()) {
                 await Get.find<ProfileController>().getUserInfo();
                 await Get.find<NotificationController>()
@@ -494,7 +497,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : const EdgeInsets.only(
                                     bottom: Dimensions.paddingSizeOverLarge),
                             child: AllRestaurantsWidget(
-                                scrollController: _scrollController),
+                              scrollController: _scrollController,
+                            ),
                           ))),
                           SliverToBoxAdapter(
                             child: Container(

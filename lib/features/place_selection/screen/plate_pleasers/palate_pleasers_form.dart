@@ -135,6 +135,13 @@ class _ReservationFormState extends State<PlatePleasersForm> {
           const SizedBox(height: Dimensions.paddingSizeLarge),
           _buildDateTimeSelectors(),
           const SizedBox(height: Dimensions.paddingSizeLarge),
+          CustomTextFieldWidget(
+            controller: widget.controller.messageController,
+            hintText: 'Message (Optional)',
+            maxLines: 5,
+            inputType: TextInputType.multiline,
+          ),
+          const SizedBox(height: Dimensions.paddingSizeLarge),
           Center(
             child: Obx(
               () => CustomButtonWidget(

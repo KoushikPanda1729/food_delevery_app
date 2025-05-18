@@ -161,15 +161,15 @@ class RestaurantController extends GetxController implements GetxService {
     update();
   }
 
-  Future<void> getRestaurantList(int offset, bool reload,
+  Future<void> getRestaurantList(int offset, bool reload, String restaurant,
       {bool fromMap = false}) async {
     if (reload) {
       _restaurantModel = null;
       update();
     }
     RestaurantModel? restaurantModel =
-        await restaurantServiceInterface.getRestaurantList(
-            offset, _restaurantType, _topRated, _discount, _veg, _nonVeg,
+        await restaurantServiceInterface.getRestaurantList(offset,
+            _restaurantType, _topRated, _discount, _veg, _nonVeg, restaurant,
             fromMap: fromMap);
     if (restaurantModel != null) {
       if (offset == 1) {
@@ -185,27 +185,27 @@ class RestaurantController extends GetxController implements GetxService {
 
   void setRestaurantType(String type) {
     _restaurantType = type;
-    getRestaurantList(1, true);
+    getRestaurantList(1, true, '');
   }
 
   void setTopRated() {
     _topRated = restaurantServiceInterface.setTopRated(_topRated);
-    getRestaurantList(1, true);
+    getRestaurantList(1, true, '');
   }
 
   void setDiscount() {
     _discount = restaurantServiceInterface.setDiscounted(_discount);
-    getRestaurantList(1, true);
+    getRestaurantList(1, true, '');
   }
 
   void setVeg() {
     _veg = restaurantServiceInterface.setVeg(_veg);
-    getRestaurantList(1, true);
+    getRestaurantList(1, true, '');
   }
 
   void setNonVeg() {
     _nonVeg = restaurantServiceInterface.setNonVeg(_nonVeg);
-    getRestaurantList(1, true);
+    getRestaurantList(1, true, '');
   }
 
   Future<void> getPopularRestaurantList(

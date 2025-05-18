@@ -11,7 +11,6 @@ class RestaurantModel {
   RestaurantModel({this.totalSize, this.limit, this.offset, this.restaurants});
 
   RestaurantModel.fromJson(Map<String, dynamic> json, String? restaurant) {
-    print("==================================>${restaurant}");
     totalSize = json['total_size'];
     limit = json['limit'].toString();
     offset =
@@ -21,12 +20,15 @@ class RestaurantModel {
     if (json['restaurants'] != null) {
       restaurants = [];
       json['restaurants'].forEach((v) {
-        if (restaurant == "shangai") {
-          if (v['name'] == "pan asian") {
+        if (restaurant != null && restaurant.toLowerCase() == "shanghai") {
+          if (v['cuisine'] != null &&
+              (v['cuisine'] as List).any((e) => e['name'] == "Pan Asian")) {
             restaurants!.add(Restaurant.fromJson(v));
           }
-        } else if (restaurant == "saltanat") {
-          if (v['name'] == "maghali") {
+        } else if (restaurant != null &&
+            restaurant.toLowerCase() == "saltanat") {
+          if (v['cuisine'] != null &&
+              (v['cuisine'] as List).any((e) => e['name'] == "Mughlai")) {
             restaurants!.add(Restaurant.fromJson(v));
           }
         } else {

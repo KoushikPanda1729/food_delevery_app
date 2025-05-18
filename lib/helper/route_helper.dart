@@ -150,7 +150,7 @@ class RouteHelper {
   static String getPlaceServiceRoute() => bookPalateService;
   static String getInitialRoute(
           {bool fromSplash = false, String? restaurant}) =>
-      '$initial?from-splash=$fromSplash&restaurant=${restaurant ?? ''}';
+      '$initial?from-splash=$fromSplash&restaurant=$restaurant';
   static String getSplashRoute(
       NotificationBodyModel? body, DeepLinkBody? linkBody) {
     String data = 'null';

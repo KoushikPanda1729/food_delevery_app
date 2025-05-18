@@ -13,6 +13,7 @@ class PalateServiceController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? countryDialCode = CountryCode.fromCountryCode(
@@ -25,8 +26,6 @@ class PalateServiceController extends GetxController {
 
   String selectedOutlet = 'Wedding Catering';
   DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
-  int personCount = 1;
 
   final List<String> outlets = [
     'Wedding Catering',
@@ -42,6 +41,7 @@ class PalateServiceController extends GetxController {
       nameController.text = userInfo?.fName ?? '';
       phoneController.text = '';
       emailController.text = userInfo?.email ?? '';
+      messageController.text = '';
     }
   }
 
@@ -79,19 +79,18 @@ class PalateServiceController extends GetxController {
         isLoading = true;
 
         String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
-        String formattedTime = selectedTime.format(context);
 
         Map<String, dynamic> payload = {
-          "outlate_name": selectedOutlet,
+          "service": selectedOutlet,
           "name": nameController.text,
           "phone": phoneController.text,
           "email": emailController.text.isNotEmpty ? emailController.text : '',
-          "date_time": '$formattedDate $formattedTime',
-          "packs": personCount.toString(),
+          "date": formattedDate,
+          "message":
+              messageController.text.isNotEmpty ? messageController.text : '',
         };
-
         final response = await http.post(
-          Uri.parse('https://order.shanghai.net.in/reserve_table.php'),
+          Uri.parse('https://order.shanghai.net.in/palate_pleasers_book.php'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(payload),
         );
@@ -101,11 +100,9 @@ class PalateServiceController extends GetxController {
         showNotificationCard(context, false);
       } finally {
         isLoading = false;
-
         selectedOutlet = 'Wedding Catering';
         selectedDate = DateTime.now();
-        selectedTime = TimeOfDay.now();
-        personCount = 1;
+        messageController.clear();
       }
     }
   }

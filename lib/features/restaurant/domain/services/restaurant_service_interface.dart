@@ -11,7 +11,7 @@ abstract class RestaurantServiceInterface {
   double getRestaurantDistanceFromUser(LatLng restaurantLatLng);
   String filterRestaurantLinkUrl(String slug, int? restaurantId);
   Future<RestaurantModel?> getRestaurantList(int offset, String filterBy,
-      int topRated, int discount, int veg, int nonVeg,
+      int topRated, int discount, int veg, int nonVeg, String? restaurant,
       {bool fromMap = false});
   Future<List<Restaurant>?> getOrderAgainRestaurantList();
   Future<List<Restaurant>?> getRecentlyViewedRestaurantList(String type);
