@@ -41,32 +41,150 @@ class _ReservationFormState extends State<ReservationForm> {
     super.dispose();
   }
 
-  // Date Picker
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+  // Date Bottom Sheet
+  void _showDateBottomSheet() {
+    DateTime initialDate = widget.controller.selectedDate;
+
+    showModalBottomSheet(
       context: context,
-      initialDate: widget.controller.selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.7,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.radiusExtraLarge),
+            topRight: Radius.circular(Dimensions.radiusExtraLarge),
+          ),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Select Date', style: robotoBold.copyWith(fontSize: 20)),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 0),
+            Expanded(
+              child: CalendarDatePicker(
+                initialDate: initialDate,
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(const Duration(days: 365)),
+                onDateChanged: (DateTime date) {
+                  setState(() {
+                    widget.controller.selectedDate = date;
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
-    if (picked != null && picked != widget.controller.selectedDate) {
-      setState(() {
-        widget.controller.selectedDate = picked;
-      });
-    }
   }
 
-  // Time Picker
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
+  // Time Bottom Sheet
+  void _showTimeBottomSheet() {
+    final TimeOfDay initialTime = widget.controller.selectedTime;
+
+    showModalBottomSheet(
       context: context,
-      initialTime: widget.controller.selectedTime,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.radiusExtraLarge),
+            topRight: Radius.circular(Dimensions.radiusExtraLarge),
+          ),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Select Time', style: robotoBold.copyWith(fontSize: 20)),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 0),
+            Expanded(
+              child: _buildTimePickerContent(initialTime),
+            ),
+          ],
+        ),
+      ),
     );
-    if (picked != null && picked != widget.controller.selectedTime) {
-      setState(() {
-        widget.controller.selectedTime = picked;
-      });
+  }
+
+  Widget _buildTimePickerContent(TimeOfDay initialTime) {
+    // Create a list of hourly time slots from 9 AM to 10 PM
+    final List<TimeOfDay> timeSlots = [];
+    for (int hour = 9; hour <= 22; hour++) {
+      timeSlots.add(TimeOfDay(hour: hour, minute: 0));
+      timeSlots.add(TimeOfDay(hour: hour, minute: 30));
     }
+
+    return ListView.builder(
+      padding:
+          const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
+      itemCount: timeSlots.length,
+      itemBuilder: (context, index) {
+        final TimeOfDay timeSlot = timeSlots[index];
+        final bool isSelected = timeSlot.hour == initialTime.hour &&
+            timeSlot.minute == initialTime.minute;
+
+        return InkWell(
+          onTap: () {
+            setState(() {
+              widget.controller.selectedTime = timeSlot;
+            });
+            Navigator.pop(context);
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Dimensions.paddingSizeLarge,
+              vertical: Dimensions.paddingSizeDefault,
+            ),
+            color: isSelected
+                ? Theme.of(context).primaryColor.withOpacity(0.1)
+                : Colors.transparent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  MaterialLocalizations.of(context).formatTimeOfDay(timeSlot),
+                  style: isSelected ? robotoMedium : robotoRegular,
+                ),
+                if (isSelected)
+                  Icon(
+                    Icons.check_circle,
+                    color: Theme.of(context).primaryColor,
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -140,7 +258,7 @@ class _ReservationFormState extends State<ReservationForm> {
               Text('Date', style: robotoMedium),
               const SizedBox(height: Dimensions.paddingSizeExtraSmall),
               InkWell(
-                onTap: () => _selectDate(context),
+                onTap: () => _showDateBottomSheet(),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: Dimensions.paddingSizeSmall,
@@ -177,7 +295,7 @@ class _ReservationFormState extends State<ReservationForm> {
               Text('Time', style: robotoMedium),
               const SizedBox(height: Dimensions.paddingSizeExtraSmall),
               InkWell(
-                onTap: () => _selectTime(context),
+                onTap: () => _showTimeBottomSheet(),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: Dimensions.paddingSizeSmall,
