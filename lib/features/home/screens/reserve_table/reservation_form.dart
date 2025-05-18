@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:stackfood_multivendor/common/widgets/custom_button_widget.dart';
 import 'package:stackfood_multivendor/common/widgets/custom_text_field_widget.dart';
-import 'package:stackfood_multivendor/features/home/screens/reserve_table/outlet_dropdown.dart';
+import 'package:stackfood_multivendor/features/home/screens/reserve_table/outlet_bottomsheet.dart';
 import 'package:stackfood_multivendor/features/home/screens/reserve_table/person_counter.dart';
 import 'package:stackfood_multivendor/features/home/screens/reserve_table/reserve_table_controller.dart';
 import 'package:stackfood_multivendor/features/language/controllers/localization_controller.dart';
@@ -71,19 +71,13 @@ class _ReservationFormState extends State<ReservationForm> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "===is loading==============================> ${widget.controller.isLoading}");
     return Form(
       key: widget.controller.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Outlet Selection
-          OutletDropdown(controller: widget.controller),
-
+          OutletBottomSheet(controller: widget.controller),
           const SizedBox(height: Dimensions.paddingSizeLarge),
-
-          // Name Field
           CustomTextFieldWidget(
             controller: widget.controller.nameController,
             hintText: 'Your Name',
@@ -92,10 +86,7 @@ class _ReservationFormState extends State<ReservationForm> {
             prefixIcon: Icons.person,
             divider: true,
           ),
-
           const SizedBox(height: Dimensions.paddingSizeDefault),
-
-          // Phone Field
           CustomTextFieldWidget(
             titleText: 'phone'.tr,
             controller: widget.controller.phoneController,
@@ -112,10 +103,7 @@ class _ReservationFormState extends State<ReservationForm> {
                     .code
                 : Get.find<LocalizationController>().locale.countryCode,
           ),
-
           const SizedBox(height: Dimensions.paddingSizeDefault),
-
-          // Email Field (Optional)
           CustomTextFieldWidget(
             controller: widget.controller.emailController,
             hintText: 'Email (Optional)',
@@ -123,20 +111,11 @@ class _ReservationFormState extends State<ReservationForm> {
             prefixIcon: Icons.email,
             divider: true,
           ),
-
           const SizedBox(height: Dimensions.paddingSizeLarge),
-
-          // Date and Time Selection
           _buildDateTimeSelectors(),
-
           const SizedBox(height: Dimensions.paddingSizeLarge),
-
-          // Person Count Selection
           PersonCounter(controller: widget.controller),
-
           const SizedBox(height: Dimensions.paddingSizeLarge),
-
-          // Submit Button
           Center(
             child: Obx(
               () => CustomButtonWidget(
