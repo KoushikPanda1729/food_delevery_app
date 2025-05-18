@@ -84,7 +84,6 @@ class _ReservationFormState extends State<ReservationForm> {
             inputType: TextInputType.name,
             capitalization: TextCapitalization.words,
             prefixIcon: Icons.person,
-            divider: true,
           ),
           const SizedBox(height: Dimensions.paddingSizeDefault),
           CustomTextFieldWidget(
@@ -109,7 +108,6 @@ class _ReservationFormState extends State<ReservationForm> {
             hintText: 'Email (Optional)',
             inputType: TextInputType.emailAddress,
             prefixIcon: Icons.email,
-            divider: true,
           ),
           const SizedBox(height: Dimensions.paddingSizeLarge),
           _buildDateTimeSelectors(),
