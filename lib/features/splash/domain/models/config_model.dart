@@ -1,4 +1,3 @@
-
 class ConfigModel {
   String? businessName;
   String? logo;
@@ -88,95 +87,95 @@ class ConfigModel {
   DeliverymanAdditionalJoinUsPageData? deliverymanAdditionalJoinUsPageData;
   bool? guestCheckoutStatus;
 
-  ConfigModel(
-      {this.businessName,
-        this.logo,
-        this.address,
-        this.phone,
-        this.email,
-        this.baseUrls,
-        this.currencySymbol,
-        this.cashOnDelivery,
-        this.digitalPayment,
-        this.termsAndConditions,
-        this.privacyPolicy,
-        this.aboutUs,
-        this.country,
-        this.defaultLocation,
-        this.appUrlAndroid,
-        this.appUrlIos,
-        this.customerVerification,
-        this.orderDeliveryVerification,
-        this.currencySymbolDirection,
-        this.appMinimumVersionAndroid,
-        this.appMinimumVersionIos,
-        this.freeDeliveryOver,
-        this.demo,
-        this.maintenanceMode,
-        this.popularFood,
-        this.popularRestaurant,
-        this.mostReviewedFoods,
-        this.newRestaurant,
-        this.orderConfirmationModel,
-        this.showDmEarning,
-        this.canceledByDeliveryman,
-        this.canceledByRestaurant,
-        this.timeformat,
-        this.toggleVegNonVeg,
-        this.toggleDmRegistration,
-        this.toggleRestaurantRegistration,
-        this.socialLogin,
-        this.appleLogin,
-        this.scheduleOrderSlotDuration,
-        this.digitAfterDecimalPoint,
-        this.loyaltyPointExchangeRate,
-        this.loyaltyPointItemPurchasePoint,
-        this.loyaltyPointStatus,
-        this.minimumPointToTransfer,
-        this.customerWalletStatus,
-        this.dmTipsStatus,
-        this.refEarningStatus,
-        this.refEarningExchangeRate,
-        this.theme,
-        this.businessPlan,
-        this.adminCommission,
-        this.refundStatus,
-        this.refundPolicyStatus,
-        this.refundPolicyData,
-        this.cancellationPolicyStatus,
-        this.cancellationPolicyData,
-        this.shippingPolicyStatus,
-        this.shippingPolicyData,
-        this.freeTrialPeriodStatus,
-        this.freeTrialPeriodDay,
-        this.taxIncluded,
-        this.cookiesText,
-        this.language,
-        this.takeAway,
-        this.homeDelivery,
-        this.repeatOrderOption,
-        this.socialMedia,
-        this.footerText,
-        this.landingPageLinks,
-        this.activePaymentMethodList,
-        this.digitalPaymentInfo,
-        this.addFundStatus,
-        this.partialPaymentStatus,
-        this.partialPaymentMethod,
-        this.additionalChargeStatus,
-        this.additionalChargeName,
-        this.additionCharge,
-        this.bannerData,
-        this.offlinePaymentStatus,
-        this.freeDeliveryDistanceStatus,
-        this.freeDeliveryDistance,
-        this.instantOrder,
-        this.customerDateOrderStatus,
-        this.customerOrderDate,
-        this.restaurantAdditionalJoinUsPageData,
-        this.deliverymanAdditionalJoinUsPageData,
-        this.guestCheckoutStatus,
-      });
+  ConfigModel({
+    this.businessName,
+    this.logo,
+    this.address,
+    this.phone,
+    this.email,
+    this.baseUrls,
+    this.currencySymbol,
+    this.cashOnDelivery,
+    this.digitalPayment,
+    this.termsAndConditions,
+    this.privacyPolicy,
+    this.aboutUs,
+    this.country,
+    this.defaultLocation,
+    this.appUrlAndroid,
+    this.appUrlIos,
+    this.customerVerification,
+    this.orderDeliveryVerification,
+    this.currencySymbolDirection,
+    this.appMinimumVersionAndroid,
+    this.appMinimumVersionIos,
+    this.freeDeliveryOver,
+    this.demo,
+    this.maintenanceMode,
+    this.popularFood,
+    this.popularRestaurant,
+    this.mostReviewedFoods,
+    this.newRestaurant,
+    this.orderConfirmationModel,
+    this.showDmEarning,
+    this.canceledByDeliveryman,
+    this.canceledByRestaurant,
+    this.timeformat,
+    this.toggleVegNonVeg,
+    this.toggleDmRegistration,
+    this.toggleRestaurantRegistration,
+    this.socialLogin,
+    this.appleLogin,
+    this.scheduleOrderSlotDuration,
+    this.digitAfterDecimalPoint,
+    this.loyaltyPointExchangeRate,
+    this.loyaltyPointItemPurchasePoint,
+    this.loyaltyPointStatus,
+    this.minimumPointToTransfer,
+    this.customerWalletStatus,
+    this.dmTipsStatus,
+    this.refEarningStatus,
+    this.refEarningExchangeRate,
+    this.theme,
+    this.businessPlan,
+    this.adminCommission,
+    this.refundStatus,
+    this.refundPolicyStatus,
+    this.refundPolicyData,
+    this.cancellationPolicyStatus,
+    this.cancellationPolicyData,
+    this.shippingPolicyStatus,
+    this.shippingPolicyData,
+    this.freeTrialPeriodStatus,
+    this.freeTrialPeriodDay,
+    this.taxIncluded,
+    this.cookiesText,
+    this.language,
+    this.takeAway,
+    this.homeDelivery,
+    this.repeatOrderOption,
+    this.socialMedia,
+    this.footerText,
+    this.landingPageLinks,
+    this.activePaymentMethodList,
+    this.digitalPaymentInfo,
+    this.addFundStatus,
+    this.partialPaymentStatus,
+    this.partialPaymentMethod,
+    this.additionalChargeStatus,
+    this.additionalChargeName,
+    this.additionCharge,
+    this.bannerData,
+    this.offlinePaymentStatus,
+    this.freeDeliveryDistanceStatus,
+    this.freeDeliveryDistance,
+    this.instantOrder,
+    this.customerDateOrderStatus,
+    this.customerOrderDate,
+    this.restaurantAdditionalJoinUsPageData,
+    this.deliverymanAdditionalJoinUsPageData,
+    this.guestCheckoutStatus,
+  });
 
   ConfigModel.fromJson(Map<String, dynamic> json) {
     businessName = json['business_name'];
@@ -184,7 +183,8 @@ class ConfigModel {
     address = json['address'];
     phone = json['phone'];
     email = json['email'];
-    baseUrls = json['base_urls'] != null ? BaseUrls.fromJson(json['base_urls']) : null;
+    baseUrls =
+        json['base_urls'] != null ? BaseUrls.fromJson(json['base_urls']) : null;
     currencySymbol = json['currency_symbol'];
     cashOnDelivery = json['cash_on_delivery'];
     digitalPayment = json['digital_payment'];
@@ -192,15 +192,23 @@ class ConfigModel {
     privacyPolicy = json['privacy_policy'];
     aboutUs = json['about_us'];
     country = json['country'];
-    defaultLocation = json['default_location'] != null ? DefaultLocation.fromJson(json['default_location']) : null;
+    defaultLocation = json['default_location'] != null
+        ? DefaultLocation.fromJson(json['default_location'])
+        : null;
     appUrlAndroid = json['app_url_android'];
     appUrlIos = json['app_url_ios'];
     customerVerification = json['customer_verification'];
     orderDeliveryVerification = json['order_delivery_verification'];
     currencySymbolDirection = json['currency_symbol_direction'];
-    appMinimumVersionAndroid = json['app_minimum_version_android'] != null ? json['app_minimum_version_android'].toDouble() : 0.0;
-    appMinimumVersionIos = json['app_minimum_version_ios'] != null ? json['app_minimum_version_ios'].toDouble() : 0.0;
-    freeDeliveryOver = json['free_delivery_over'] != null ? double.parse(json['free_delivery_over'].toString()) : null;
+    appMinimumVersionAndroid = json['app_minimum_version_android'] != null
+        ? json['app_minimum_version_android'].toDouble()
+        : 0.0;
+    appMinimumVersionIos = json['app_minimum_version_ios'] != null
+        ? json['app_minimum_version_ios'].toDouble()
+        : 0.0;
+    freeDeliveryOver = json['free_delivery_over'] != null
+        ? double.parse(json['free_delivery_over'].toString())
+        : null;
     demo = json['demo'];
     maintenanceMode = json['maintenance_mode'];
     popularFood = json['popular_food'];
@@ -227,10 +235,13 @@ class ConfigModel {
         appleLogin!.add(SocialLogin.fromJson(v));
       });
     }
-    scheduleOrderSlotDuration = json['schedule_order_slot_duration'] == 0 ? 30 : json['schedule_order_slot_duration'];
+    scheduleOrderSlotDuration = json['schedule_order_slot_duration'] == 0
+        ? 30
+        : json['schedule_order_slot_duration'];
     digitAfterDecimalPoint = json['digit_after_decimal_point'];
     loyaltyPointExchangeRate = json['loyalty_point_exchange_rate'];
-    loyaltyPointItemPurchasePoint = json['loyalty_point_item_purchase_point'].toDouble();
+    loyaltyPointItemPurchasePoint =
+        json['loyalty_point_item_purchase_point'].toDouble();
     loyaltyPointStatus = json['loyalty_point_status'];
     minimumPointToTransfer = json['minimum_point_to_transfer'];
     customerWalletStatus = json['customer_wallet_status'];
@@ -238,7 +249,9 @@ class ConfigModel {
     refEarningStatus = json['ref_earning_status'];
     refEarningExchangeRate = json['ref_earning_exchange_rate'].toDouble();
     theme = json['theme'];
-    businessPlan = json['business_plan'] != null ? BusinessPlan.fromJson(json['business_plan']) : null;
+    businessPlan = json['business_plan'] != null
+        ? BusinessPlan.fromJson(json['business_plan'])
+        : null;
     adminCommission = json['admin_commission'].toDouble();
     refundStatus = json['refund_active_status'];
     refundPolicyStatus = json['refund_policy_status'];
@@ -267,29 +280,45 @@ class ConfigModel {
       });
     }
     footerText = json['footer_text'];
-    landingPageLinks = json['landing_page_links'] != null ? LandingPageLinks.fromJson(json['landing_page_links']) : null;
+    landingPageLinks = json['landing_page_links'] != null
+        ? LandingPageLinks.fromJson(json['landing_page_links'])
+        : null;
     if (json['active_payment_method_list'] != null) {
       activePaymentMethodList = <PaymentBody>[];
       json['active_payment_method_list'].forEach((v) {
         activePaymentMethodList!.add(PaymentBody.fromJson(v));
       });
     }
-    digitalPaymentInfo = json['digital_payment_info'] != null ? DigitalPaymentInfo.fromJson(json['digital_payment_info']) : null;
+    digitalPaymentInfo = json['digital_payment_info'] != null
+        ? DigitalPaymentInfo.fromJson(json['digital_payment_info'])
+        : null;
     addFundStatus = json['add_fund_status'] == 1;
     partialPaymentStatus = json['partial_payment_status'] == 1;
     partialPaymentMethod = json['partial_payment_method'];
     additionalChargeStatus = json['additional_charge_status'] == 1;
     additionalChargeName = json['additional_charge_name'];
     additionCharge = json['additional_charge']?.toDouble() ?? 0;
-    bannerData = json['banner_data'] != null && json['banner_data'] != 'null' ? BannerData.fromJson(json['banner_data']) : null;
+    bannerData = json['banner_data'] != null && json['banner_data'] != 'null'
+        ? BannerData.fromJson(json['banner_data'])
+        : null;
     offlinePaymentStatus = json['offline_payment_status'] == 1;
     freeDeliveryDistanceStatus = json['free_delivery_distance_status'];
-    freeDeliveryDistance = json['free_delivery_distance'] != null ? double.parse(json['free_delivery_distance'].toString()) : null;
+    freeDeliveryDistance = json['free_delivery_distance'] != null
+        ? double.parse(json['free_delivery_distance'].toString())
+        : null;
     instantOrder = json['instant_order'];
     customerDateOrderStatus = json['customer_date_order_sratus'];
     customerOrderDate = json['customer_order_date'];
-    restaurantAdditionalJoinUsPageData = json['restaurant_additional_join_us_page_data'] != null ? RestaurantAdditionalJoinUsPageData.fromJson(json['restaurant_additional_join_us_page_data']) : null;
-    deliverymanAdditionalJoinUsPageData = json['deliveryman_additional_join_us_page_data'] != null ? DeliverymanAdditionalJoinUsPageData.fromJson(json['deliveryman_additional_join_us_page_data']) : null;
+    restaurantAdditionalJoinUsPageData =
+        json['restaurant_additional_join_us_page_data'] != null
+            ? RestaurantAdditionalJoinUsPageData.fromJson(
+                json['restaurant_additional_join_us_page_data'])
+            : null;
+    deliverymanAdditionalJoinUsPageData =
+        json['deliveryman_additional_join_us_page_data'] != null
+            ? DeliverymanAdditionalJoinUsPageData.fromJson(
+                json['deliveryman_additional_join_us_page_data'])
+            : null;
     guestCheckoutStatus = json['guest_checkout_status'] == 1;
   }
 
@@ -369,7 +398,8 @@ class ConfigModel {
       data['landing_page_links'] = landingPageLinks!.toJson();
     }
     if (activePaymentMethodList != null) {
-      data['active_payment_method_list'] = activePaymentMethodList!.map((v) => v.toJson()).toList();
+      data['active_payment_method_list'] =
+          activePaymentMethodList!.map((v) => v.toJson()).toList();
     }
     if (digitalPaymentInfo != null) {
       data['digital_payment_info'] = digitalPaymentInfo!.toJson();
@@ -386,10 +416,12 @@ class ConfigModel {
     data['customer_date_order_sratus'] = customerDateOrderStatus;
     data['customer_order_date'] = customerOrderDate;
     if (restaurantAdditionalJoinUsPageData != null) {
-      data['restaurant_additional_join_us_page_data'] = restaurantAdditionalJoinUsPageData!.toJson();
+      data['restaurant_additional_join_us_page_data'] =
+          restaurantAdditionalJoinUsPageData!.toJson();
     }
     if (deliverymanAdditionalJoinUsPageData != null) {
-      data['deliveryman_additional_join_us_page_data'] = deliverymanAdditionalJoinUsPageData!.toJson();
+      data['deliveryman_additional_join_us_page_data'] =
+          deliverymanAdditionalJoinUsPageData!.toJson();
     }
     data['guest_checkout_status'] = guestCheckoutStatus;
     return data;
@@ -414,24 +446,24 @@ class BaseUrls {
   String? gatewayImageUrl;
   String? orderAttachmentUrl;
 
-  BaseUrls(
-      {this.productImageUrl,
-        this.customerImageUrl,
-        this.bannerImageUrl,
-        this.categoryImageUrl,
-        this.reviewImageUrl,
-        this.notificationImageUrl,
-        this.restaurantImageUrl,
-        this.restaurantCoverPhotoUrl,
-        this.deliveryManImageUrl,
-        this.chatImageUrl,
-        this.campaignImageUrl,
-        this.businessLogoUrl,
-        this.refundImageUrl,
-        this.cuisineImageUrl,
-        this.gatewayImageUrl,
-        this.orderAttachmentUrl,
-      });
+  BaseUrls({
+    this.productImageUrl,
+    this.customerImageUrl,
+    this.bannerImageUrl,
+    this.categoryImageUrl,
+    this.reviewImageUrl,
+    this.notificationImageUrl,
+    this.restaurantImageUrl,
+    this.restaurantCoverPhotoUrl,
+    this.deliveryManImageUrl,
+    this.chatImageUrl,
+    this.campaignImageUrl,
+    this.businessLogoUrl,
+    this.refundImageUrl,
+    this.cuisineImageUrl,
+    this.gatewayImageUrl,
+    this.orderAttachmentUrl,
+  });
 
   BaseUrls.fromJson(Map<String, dynamic> json) {
     productImageUrl = json['product_image_url'];
@@ -559,12 +591,12 @@ class SocialMedia {
   String? link;
   int? status;
 
-  SocialMedia(
-      {this.id,
-        this.name,
-        this.link,
-        this.status,
-      });
+  SocialMedia({
+    this.id,
+    this.name,
+    this.link,
+    this.status,
+  });
 
   SocialMedia.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -589,12 +621,12 @@ class LandingPageLinks {
   String? appUrlIosStatus;
   String? appUrlIos;
 
-  LandingPageLinks(
-      {this.appUrlAndroidStatus,
-        this.appUrlAndroid,
-        this.appUrlIosStatus,
-        this.appUrlIos,
-      });
+  LandingPageLinks({
+    this.appUrlAndroidStatus,
+    this.appUrlAndroid,
+    this.appUrlIosStatus,
+    this.appUrlIos,
+  });
 
   LandingPageLinks.fromJson(Map<String, dynamic> json) {
     appUrlAndroidStatus = json['app_url_android_status'].toString();
@@ -640,10 +672,13 @@ class DigitalPaymentInfo {
   bool? pluginPaymentGateways;
   bool? defaultPaymentGateways;
 
-  DigitalPaymentInfo({this.digitalPayment, this.pluginPaymentGateways, this.defaultPaymentGateways});
+  DigitalPaymentInfo(
+      {this.digitalPayment,
+      this.pluginPaymentGateways,
+      this.defaultPaymentGateways});
 
   DigitalPaymentInfo.fromJson(Map<String, dynamic> json) {
-    digitalPayment =  json['digital_payment'];
+    digitalPayment = json['digital_payment'];
     pluginPaymentGateways = json['plugin_payment_gateways'];
     defaultPaymentGateways = json['default_payment_gateways'];
   }
@@ -664,7 +699,7 @@ class BannerData {
   BannerData({this.promotionalBannerTitle, this.promotionalBannerImage});
 
   BannerData.fromJson(Map<String, dynamic> json) {
-    promotionalBannerTitle =  json['promotional_banner_title'];
+    promotionalBannerTitle = json['promotional_banner_title'];
     promotionalBannerImage = json['promotional_banner_image'];
   }
 
@@ -730,19 +765,20 @@ class DataModel {
   String? placeholderData;
   int? isRequired;
 
-  DataModel({this.fieldType,
-    this.inputData,
-    this.checkData,
-    this.mediaData,
-    this.placeholderData,
-    this.isRequired});
+  DataModel(
+      {this.fieldType,
+      this.inputData,
+      this.checkData,
+      this.mediaData,
+      this.placeholderData,
+      this.isRequired});
 
   DataModel.fromJson(Map<String, dynamic> json) {
     fieldType = json['field_type'];
     inputData = json['input_data'];
     // checkData = json['check_data'].cast<String>();
 
-    if(json['check_data'] != null) {
+    if (json['check_data'] != null) {
       checkData = [];
       json['check_data'].forEach((e) => checkData!.add(e));
     }

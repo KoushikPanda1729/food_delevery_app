@@ -439,13 +439,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     const BadWeatherWidget(),
 
-                                    const WhatOnYourMindViewWidget(),
+                                    // const WhatOnYourMindViewWidget(),
 
                                     const TodayTrendsViewWidget(),
 
                                     const BogoItemViewWidget(),
 
-                                    const LocationBannerViewWidget(),
+                                    // const LocationBannerViewWidget(),
 
                                     _isLogin
                                         ? const OrderAgainViewWidget()
@@ -461,8 +461,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     _configModel.popularRestaurant == 1
                                         ? const PopularRestaurantsViewWidget()
                                         : const SizedBox(),
-
-                                    const ReferBannerViewWidget(),
 
                                     // _isLogin ? const PopularRestaurantsViewWidget(isRecentlyViewed: true) : const SizedBox(),
 
@@ -499,54 +497,86 @@ class _HomeScreenState extends State<HomeScreen> {
                                 scrollController: _scrollController),
                           ))),
                           SliverToBoxAdapter(
-                            child: FooterViewWidget(
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16),
                               child: Container(
-                                margin: const EdgeInsets.only(
-                                    left: 16, right: 16, bottom: 40),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white, // Background color
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.15),
-                                        spreadRadius: 1,
-                                        blurRadius: 8,
-                                        offset: const Offset(
-                                            0, 0), // Shadow in all directions
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.15),
+                                      spreadRadius: 1,
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 0),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      // Image at the top of card
+                                      Image.asset(
+                                        Images.reserveTable,
+                                        height: 180,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      // Added descriptive text
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            16, 16, 16, 8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'book_your_perfect_dining_experience'
+                                                  .tr,
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black87,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              "secure_your_table".tr,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black54,
+                                                height: 1.4,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      // Button at the bottom
+                                      Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            16, 8, 16, 16),
+                                        child: CustomButtonWidget(
+                                          isLoading: false,
+                                          onPressed: () => Get.toNamed(
+                                              RouteHelper
+                                                  .getReserveTableRoute()),
+                                          buttonText: 'Reserve Table',
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        // Image at the top of card with your specific path
-                                        Image.asset(
-                                          Images.reserveTable,
-                                          height: 180,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        // Button at the bottom of image
-                                        Container(
-                                          padding: const EdgeInsets.all(16),
-                                          child: CustomButtonWidget(
-                                            isLoading: false,
-                                            onPressed: () => Get.toNamed(
-                                                RouteHelper
-                                                    .getReserveTableRoute()),
-                                            buttonText: 'Reserve Table',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          const SliverToBoxAdapter(
+                            child: FooterViewWidget(
+                              child: ReferBannerViewWidget(),
+                            ),
+                          ),
                         ],
                       ),
           ),
