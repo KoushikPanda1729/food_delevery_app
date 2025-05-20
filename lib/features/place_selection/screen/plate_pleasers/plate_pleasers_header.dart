@@ -16,7 +16,7 @@ class PlatePleasersHeader extends StatelessWidget {
         ),
         child: ClipOval(
           child: Image.asset(
-            Images.logo,
+            Images.palatePleasersLogo,
             fit: BoxFit.cover,
           ),
         ),

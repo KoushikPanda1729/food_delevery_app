@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:stackfood_multivendor/helper/route_helper.dart';
 import 'package:stackfood_multivendor/util/images.dart';
@@ -23,12 +24,14 @@ class PlaceSelectionScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Craving Something? Select Your Place',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF333333),
+              const Center(
+                child: Text(
+                  'Craving Something? Select Your Place',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF333333),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -138,7 +141,7 @@ class RestaurantCard extends StatelessWidget {
             ),
 
             // Content layout with proper spacing
-            Padding(
+            Container(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,14 +149,14 @@ class RestaurantCard extends StatelessWidget {
                 children: [
                   // Top section with logo
                   SizedBox(
-                    height: 40,
-                    width: 40,
+                    height: 50,
+                    width: 50,
                     child: Image.asset(
                       logoPath,
                       fit: BoxFit.contain,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   // Bottom section with title and call to action
                   SizedBox(
                     width: 150,
@@ -179,7 +182,7 @@ class RestaurantCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
 
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 50),
 
                         // Call to action row
                         const Row(

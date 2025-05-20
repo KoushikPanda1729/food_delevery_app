@@ -171,7 +171,7 @@ class PalateServiceController extends GetxController {
 
                     // If success, navigate to home, otherwise just close the notification
                     if (isSuccess) {
-                      Get.toNamed(RouteHelper.initial);
+                      Get.toNamed(RouteHelper.placeSelection);
                     }
                     // For failure, we just close the overlay and let them try again
                   },

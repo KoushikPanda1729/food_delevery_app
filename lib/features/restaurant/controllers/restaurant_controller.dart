@@ -183,33 +183,36 @@ class RestaurantController extends GetxController implements GetxService {
     }
   }
 
-  void setRestaurantType(String type) {
+  void setRestaurantType(String type, String currentRestaurant) {
     _restaurantType = type;
-    getRestaurantList(1, true, '');
+    getRestaurantList(1, true, currentRestaurant);
   }
 
-  void setTopRated() {
+  void setTopRated(String currentRestaurant) {
     _topRated = restaurantServiceInterface.setTopRated(_topRated);
-    getRestaurantList(1, true, '');
+    getRestaurantList(1, true, currentRestaurant);
   }
 
-  void setDiscount() {
+  void setDiscount(String currentRestaurant) {
     _discount = restaurantServiceInterface.setDiscounted(_discount);
-    getRestaurantList(1, true, '');
+    getRestaurantList(1, true, currentRestaurant);
   }
 
-  void setVeg() {
+  void setVeg(String currentRestaurant) {
     _veg = restaurantServiceInterface.setVeg(_veg);
-    getRestaurantList(1, true, '');
+    getRestaurantList(1, true, currentRestaurant);
   }
 
-  void setNonVeg() {
+  void setNonVeg(String currentRestaurant) {
     _nonVeg = restaurantServiceInterface.setNonVeg(_nonVeg);
-    getRestaurantList(1, true, '');
+    getRestaurantList(1, true, currentRestaurant);
   }
 
   Future<void> getPopularRestaurantList(
-      bool reload, String type, bool notify) async {
+    bool reload,
+    String type,
+    bool notify,
+  ) async {
     _type = type;
     if (reload) {
       _popularRestaurantList = null;

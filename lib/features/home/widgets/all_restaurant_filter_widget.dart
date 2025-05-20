@@ -1,3 +1,4 @@
+import 'package:stackfood_multivendor/common/controllers/app_controller.dart';
 import 'package:stackfood_multivendor/features/home/widgets/filter_view_widget.dart';
 import 'package:stackfood_multivendor/features/home/widgets/restaurant_filter_button_widget.dart';
 import 'package:stackfood_multivendor/features/restaurant/controllers/restaurant_controller.dart';
@@ -86,25 +87,29 @@ class AllRestaurantFilterWidget extends StatelessWidget {
           const SizedBox(width: Dimensions.paddingSizeSmall),
           RestaurantsFilterButtonWidget(
             buttonText: 'top_rated'.tr,
-            onTap: () => restaurantController.setTopRated(),
+            onTap: (String? restaurant) =>
+                restaurantController.setTopRated(restaurant ?? ''),
             isSelected: restaurantController.topRated == 1,
           ),
           const SizedBox(width: Dimensions.paddingSizeSmall),
           RestaurantsFilterButtonWidget(
             buttonText: 'discounted'.tr,
-            onTap: () => restaurantController.setDiscount(),
+            onTap: (String? restaurant) =>
+                restaurantController.setDiscount(restaurant ?? ''),
             isSelected: restaurantController.discount == 1,
           ),
           const SizedBox(width: Dimensions.paddingSizeSmall),
           RestaurantsFilterButtonWidget(
             buttonText: 'veg'.tr,
-            onTap: () => restaurantController.setVeg(),
+            onTap: (String? restaurant) =>
+                restaurantController.setVeg(restaurant ?? ''),
             isSelected: restaurantController.veg == 1,
           ),
           const SizedBox(width: Dimensions.paddingSizeSmall),
           RestaurantsFilterButtonWidget(
             buttonText: 'non_veg'.tr,
-            onTap: () => restaurantController.setNonVeg(),
+            onTap: (String? restaurant) =>
+                restaurantController.setNonVeg(restaurant ?? ''),
             isSelected: restaurantController.nonVeg == 1,
           ),
           const SizedBox(width: Dimensions.paddingSizeSmall),

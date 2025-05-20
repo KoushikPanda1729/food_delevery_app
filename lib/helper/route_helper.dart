@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:stackfood_multivendor/common/controllers/app_controller.dart';
 import 'package:stackfood_multivendor/common/widgets/image_viewer_screen_widget.dart';
 import 'package:stackfood_multivendor/common/widgets/not_found_widget.dart';
 import 'package:stackfood_multivendor/features/auth/controllers/auth_controller.dart';
@@ -357,9 +358,15 @@ class RouteHelper {
     ),
     GetPage(
         name: initial,
-        page: () => getRoute(DashboardScreen(
-            pageIndex: 0,
-            fromSplash: (Get.parameters['from-splash'] == 'true')))),
+        page: () {
+          String? restaurantId = Get.parameters['restaurant'];
+          if (restaurantId != null) {
+            Get.find<AppController>().currentRestaurant = restaurantId;
+          }
+          return getRoute(DashboardScreen(
+              pageIndex: 0,
+              fromSplash: (Get.parameters['from-splash'] == 'true')));
+        }),
     GetPage(
         name: splash,
         page: () {

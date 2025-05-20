@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stackfood_multivendor/common/controllers/app_controller.dart';
 import 'package:stackfood_multivendor/common/widgets/custom_button_widget.dart';
 import 'package:stackfood_multivendor/common/widgets/customizable_space_bar_widget.dart';
 import 'package:stackfood_multivendor/common/widgets/footer_view_widget.dart';
@@ -48,15 +49,17 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   static Future<void> loadData(bool reload) async {
-    String? restaurant = Get.parameters['restaurant'];
-    debugPrint("Navigated from: $restaurant");
+    String? restaurant = Get.find<AppController>().currentRestaurant;
     Get.find<HomeController>().getBannerList(reload);
     Get.find<CategoryController>().getCategoryList(reload);
     Get.find<BogoController>().getBogoProductList(reload, false);
     Get.find<CuisineController>().getCuisineList();
     if (Get.find<SplashController>().configModel!.popularRestaurant == 1) {
-      Get.find<RestaurantController>()
-          .getPopularRestaurantList(reload, 'all', false);
+      Get.find<RestaurantController>().getPopularRestaurantList(
+        reload,
+        'all',
+        false,
+      );
     }
     Get.find<CampaignController>().getItemCampaignList(reload);
     if (Get.find<SplashController>().configModel!.popularFood == 1) {
@@ -96,14 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _isLogin = Get.find<AuthController>().isLoggedIn();
+    if (Get.parameters['restaurant'] != null) {
+      Get.find<AppController>().currentRestaurant =
+          Get.parameters['restaurant'];
+    }
     HomeScreen.loadData(false);
   }
 
   @override
   Widget build(BuildContext context) {
     double scrollPoint = 0.0;
-    String? restaurant = Get.parameters['restaurant'];
-    debugPrint("Navigated from: $restaurant");
+    String? restaurant = Get.find<AppController>().currentRestaurant;
 
     return GetBuilder<LocalizationController>(
         builder: (localizationController) {
@@ -120,8 +126,11 @@ class _HomeScreenState extends State<HomeScreen> {
               await Get.find<CategoryController>().getCategoryList(true);
               await Get.find<BogoController>().getBogoProductList(true, false);
               await Get.find<CuisineController>().getCuisineList();
-              await Get.find<RestaurantController>()
-                  .getPopularRestaurantList(true, 'all', false);
+              await Get.find<RestaurantController>().getPopularRestaurantList(
+                true,
+                'all',
+                false,
+              );
               await Get.find<CampaignController>().getItemCampaignList(true);
               await Get.find<ProductController>()
                   .getPopularProductList(true, 'all', false);
@@ -548,9 +557,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                          // const SliverToBoxAdapter(
+                          //   child: FooterViewWidget(
+                          //     child: ReferBannerViewWidget(),
+                          //   ),
+                          // ),
                           const SliverToBoxAdapter(
-                            child: FooterViewWidget(
-                              child: ReferBannerViewWidget(),
+                            child: Column(
+                              children: [
+                                ReferBannerViewWidget(),
+                                SizedBox(height: Dimensions.paddingSizeLarge),
+                              ],
                             ),
                           ),
                         ],

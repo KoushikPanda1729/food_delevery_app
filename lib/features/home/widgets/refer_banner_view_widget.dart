@@ -70,26 +70,66 @@ class ReferBannerViewWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                // RichText(
+                                //   text: TextSpan(
+                                //     children: [
+                                //       TextSpan(
+                                //         text: '${'earn'.tr} ',
+                                //         style: robotoMedium.copyWith(
+                                //             fontSize: ResponsiveHelper.isMobile(
+                                //                     context)
+                                //                 ? Dimensions.fontSizeSmall
+                                //                 : Dimensions.fontSizeLarge,
+                                //             fontWeight: FontWeight.w600,
+                                //             color: Colors.white),
+                                //       ),
+                                //       TextSpan(
+                                //         text:
+                                //             ' FLAT ${PriceConverter.convertPrice(
+                                //           Get.find<SplashController>()
+                                //               .configModel!
+                                //               .refEarningExchangeRate,
+                                //         )} ',
+                                //         style: robotoBold.copyWith(
+                                //           fontSize:
+                                //               ResponsiveHelper.isMobile(context)
+                                //                   ? Dimensions.fontSizeLarge
+                                //                   : Dimensions
+                                //                       .fontSizeOverLarge,
+                                //           color: Colors.white,
+                                //         ),
+                                //       ),
+                                //       TextSpan(
+                                //         text: 'refer_an_friend'.tr,
+                                //         style: robotoRegular.copyWith(
+                                //             fontSize: ResponsiveHelper.isMobile(
+                                //                     context)
+                                //                 ? Dimensions.fontSizeSmall
+                                //                 : Dimensions.fontSizeDefault,
+                                //             fontWeight: FontWeight.w600,
+                                //             color: Colors.white),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+
                                 RichText(
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: '${'earn'.tr} ',
+                                        text: '${'earn'.tr}\n',
                                         style: robotoMedium.copyWith(
-                                            fontSize: ResponsiveHelper.isMobile(
-                                                    context)
-                                                ? Dimensions.fontSizeSmall
-                                                : Dimensions.fontSizeLarge,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white),
+                                          fontSize:
+                                              ResponsiveHelper.isMobile(context)
+                                                  ? Dimensions.fontSizeSmall
+                                                  : Dimensions.fontSizeLarge,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                       TextSpan(
                                         text:
-                                            ' FLAT ${PriceConverter.convertPrice(
-                                          Get.find<SplashController>()
-                                              .configModel!
-                                              .refEarningExchangeRate,
-                                        )} ',
+                                            'FLAT ${PriceConverter.convertPrice(Get.find<SplashController>().configModel!.refEarningExchangeRate)}\n',
                                         style: robotoBold.copyWith(
                                           fontSize:
                                               ResponsiveHelper.isMobile(context)
@@ -99,24 +139,16 @@ class ReferBannerViewWidget extends StatelessWidget {
                                           color: Colors.white,
                                         ),
                                       ),
-                                      // TextSpan(
-                                      //   text: ' ${'when_you'.tr} ',
-                                      //   style: robotoRegular.copyWith(
-                                      //       fontSize: ResponsiveHelper.isMobile(
-                                      //               context)
-                                      //           ? Dimensions.fontSizeSmall
-                                      //           : Dimensions.fontSizeDefault,
-                                      //       color: Colors.white),
-                                      // ),
                                       TextSpan(
                                         text: 'refer_an_friend'.tr,
                                         style: robotoRegular.copyWith(
-                                            fontSize: ResponsiveHelper.isMobile(
-                                                    context)
-                                                ? Dimensions.fontSizeSmall
-                                                : Dimensions.fontSizeDefault,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white),
+                                          fontSize:
+                                              ResponsiveHelper.isMobile(context)
+                                                  ? Dimensions.fontSizeSmall
+                                                  : Dimensions.fontSizeDefault,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ],
                                   ),

@@ -41,79 +41,69 @@ class _WebHomeScreenState extends State<WebHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     bool isLogin = Get.find<AuthController>().isLoggedIn();
 
     return CustomScrollView(
       controller: widget.scrollController,
       physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
-
         const SliverToBoxAdapter(
-          child: Center(child: SizedBox(width: Dimensions.webMaxWidth,
-              child: WhatOnYourMindViewWidget()),
+          child: Center(
+            child: SizedBox(
+                width: Dimensions.webMaxWidth,
+                child: WhatOnYourMindViewWidget()),
           ),
         ),
-
-        SliverToBoxAdapter(child: GetBuilder<HomeController>(builder: (bannerController) {
-          return bannerController.bannerImageList == null ? WebBannerViewWidget(homeController: bannerController)
-              : bannerController.bannerImageList!.isEmpty ? const SizedBox() : WebBannerViewWidget(homeController: bannerController);
-        })),
-
-
         SliverToBoxAdapter(
-            child: Center(child: SizedBox(
-              width: Dimensions.webMaxWidth,
-              child: Column(children: [
-
-                const BadWeatherWidget(),
-
-                const TodayTrendsViewWidget(),
-
-                isLogin ? const OrderAgainViewWidget() : const SizedBox(),
-
-                _configModel!.popularFood == 1 ?  const BestReviewItemViewWidget(isPopular: false) : const SizedBox(),
-
-                const WebCuisineViewWidget(),
-
-                const PopularRestaurantsViewWidget(),
-
-                const PopularFoodNearbyViewWidget(),
-
-                isLogin ? const PopularRestaurantsViewWidget(isRecentlyViewed: true) : const SizedBox(),
-
-                const WebLocationAndReferBannerViewWidget(),
-
-                _configModel!.newRestaurant == 1 ? const WebNewOnStackFoodViewWidget(isLatest: true) : const SizedBox(),
-
-                const PromotionalBannerViewWidget(),
-
-                const SizedBox(width: Dimensions.paddingSizeExtraSmall),
-
-              ]),
-            ))
-        ),
-
-
+            child: GetBuilder<HomeController>(builder: (bannerController) {
+          return bannerController.bannerImageList == null
+              ? WebBannerViewWidget(homeController: bannerController)
+              : bannerController.bannerImageList!.isEmpty
+                  ? const SizedBox()
+                  : WebBannerViewWidget(homeController: bannerController);
+        })),
+        SliverToBoxAdapter(
+            child: Center(
+                child: SizedBox(
+          width: Dimensions.webMaxWidth,
+          child: Column(children: [
+            const BadWeatherWidget(),
+            const TodayTrendsViewWidget(),
+            isLogin ? const OrderAgainViewWidget() : const SizedBox(),
+            _configModel!.popularFood == 1
+                ? const BestReviewItemViewWidget(isPopular: false)
+                : const SizedBox(),
+            const WebCuisineViewWidget(),
+            const PopularRestaurantsViewWidget(),
+            const PopularFoodNearbyViewWidget(),
+            isLogin
+                ? const PopularRestaurantsViewWidget(isRecentlyViewed: true)
+                : const SizedBox(),
+            const WebLocationAndReferBannerViewWidget(),
+            _configModel!.newRestaurant == 1
+                ? const WebNewOnStackFoodViewWidget(isLatest: true)
+                : const SizedBox(),
+            const PromotionalBannerViewWidget(),
+            const SizedBox(width: Dimensions.paddingSizeExtraSmall),
+          ]),
+        ))),
         SliverPersistentHeader(
           pinned: true,
           delegate: SliverDelegate(
             child: const AllRestaurantFilterWidget(),
           ),
         ),
-
-
-
-        SliverToBoxAdapter(child: Center(child: Column(
+        SliverToBoxAdapter(
+            child: Center(
+                child: Column(
           children: [
             const SizedBox(height: Dimensions.paddingSizeLarge),
-
             FooterViewWidget(
-              child: AllRestaurantsWidget(scrollController: widget.scrollController),
+              child: AllRestaurantsWidget(
+                  scrollController: widget.scrollController),
             ),
           ],
         ))),
-
       ],
     );
   }
@@ -125,7 +115,8 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
   SliverDelegate({required this.child});
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return child;
   }
 
@@ -137,6 +128,8 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverDelegate oldDelegate) {
-    return oldDelegate.maxExtent != 50 || oldDelegate.minExtent != 50 || child != oldDelegate.child;
+    return oldDelegate.maxExtent != 50 ||
+        oldDelegate.minExtent != 50 ||
+        child != oldDelegate.child;
   }
 }
